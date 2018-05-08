@@ -57,8 +57,10 @@ class PedidoController extends Controller
         $nuevoPedido->idUsuario = $usuario->id;
         $nuevoPedido->idEstadoPedido = 2;
         $nuevoPedido->total = $request->input("hdTotal");
+        $indice = 0;
 
         if($nuevoPedido->save()){
+            $ids = $request->input("ids");
             $cantidades = $request->input("cantidades");
             $nombres = $request->input("nombres");
             $precios = $request->input("precios");
@@ -71,12 +73,15 @@ class PedidoController extends Controller
                 $nuevoElementoPedido->idComida = $ids[$indice];
                 $nuevoElementoPedido->nombreComida = $nombres[$indice];
                 $nuevoElementoPedido->precioComida = $precios[$indice];
-                $nuevoElementoPedido->cantidad = $cantidad[$indice];
+                $nuevoElementoPedido->cantidad = $cantidades[$indice];
                 $nuevoElementoPedido->subtotal = $subtotales[$indice];
+                $nuevoElementoPedido->save();
+                $indice++;
             }
         } else {
             
         }
+        return redirect()->route('pedidos.index');
     }
 
     /**

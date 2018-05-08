@@ -6,6 +6,7 @@ function actualizarTotal(){
         total += Number($(this).text(),)
     })
     $("#cellTotal").text(total);
+    $("·hdTotal").val(total);
 }
 
 function agregarElemento(nombreABuscar, cantidad){
